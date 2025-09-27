@@ -1,0 +1,131 @@
+<!-- JAVASCRIPT CALCULATOR USING IF-ELSE-->
+<!DOCTYPE html>
+<html lang="en"> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Calculator</title>
+
+        <style>
+            h1{
+                background-color: rgb(214, 194, 250);
+                text-align: center;
+                font-style: oblique;
+
+            }
+            .calculator{
+                background-color: rgb(238, 207, 250);
+                width: 400px;
+                height: 200px;
+                margin: 20px auto;
+                border-radius: 20px;
+                padding: 20px;
+                border: 3px solid rgb(88, 0, 139);
+            }
+             select, button {
+                display: inline-block;
+                padding: 5px;
+                margin: 10px;
+                font-size: 17px;
+                border-radius: 5px;
+
+            }
+            label{
+                background-color: rgb(210, 173, 245);
+                font-size: 20px;
+                font-style: oblique;
+                padding: 3px;
+                margin: 3px;
+            }
+            #output{
+                text-align: center;
+                font-weight: 300;
+                margin-top: 20px;
+            }
+
+             button:hover {
+                background-color: rgb(215, 183, 245);
+            }
+            button{
+                width: 100%;
+            }
+            input:focus {
+                border: 2px;
+            }
+            .form-grp{
+                margin-bottom: 10px;
+
+            }
+            label, input{
+                display:inline-block;
+                vertical-align: middle;
+                border-radius: 5px;
+                font-size: 17px;
+                font-style:oblique;
+                margin: 5px;
+
+            }
+        </style>
+
+        </head>
+        <body>
+            <h1>Calculator</h1>
+            <div class="calculator">
+                <label for="num1">Number 1:</label><input type="number" id="num1" placeholder="Enter first number">
+                <label for="num2">Number 2:</label><input type="number" id="num2" placeholder="Enter second number">
+
+                <label for="operator">Select Operator:</label>
+                <select id="operator">
+                    <option value="+">Addition(+)</option>
+                    <option value="-">Subtraction(-)</option>
+                    <option value="*">Multiplication(*)</option>
+                    <option value="/">Division(/)</option>
+                    <option value="%">Modulus(%)</option>
+
+                </select>
+                <button onclick="Calculate()">Calculate</button>  <!--onclick means on clicking this button calculate() function will  run-->
+            </div>
+            <p id="output"> Result will appear here</p>
+
+            <script>
+                function Calculate(){
+                    const number1 = Number(document.getElementById("num1").value);  // Here const is used to declare a variable named number1(idk why we used const instead of let0), Number is used to convert the input that is in number in string form to number, document.getElementById() is used to  print number on screen, value--(idk)
+                    const number2 = Number(document.getElementById("num2").value);
+                    const operator = document.getElementById("operator").value;
+
+                    let result;
+
+                    if(isNaN(number1) || isNaN(number2)){   //NaN means not a number, ||-->  or operator means any of the condition is true
+                        result="Enter a valid number";
+
+                    }
+                    else{
+                        switch(operator){
+                            case '+':
+                                result= number1 + number2;
+                                break;
+                            case '-':
+                                result= number1 - number2;
+                                break;
+                            case '*':
+                                result= number1 * number2;
+                                break;
+                            case '/':
+                                result= number2 !==0 ? number1 / number2: "Cannot divide by Zero";
+                                break;
+                            case '%':
+                                result= number2 !==0 ? number1 % number2: "Cannot divide by Zero";
+                                break;
+                                default:
+                                    result = "Invalid Operator";
+                        }
+                    }
+                    document.getElementById("output").innerText ="Result: " +result;
+
+                }
+            </script>
+
+
+        </body>
+    
+    </html>
