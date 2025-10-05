@@ -1,0 +1,151 @@
+<!-- JAVASCRIPT CALCULATOR USING IF-ELSE-->
+<!DOCTYPE html>
+<html lang="en"> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Calculator</title>
+
+        <style>
+           body {
+    background: linear-gradient(135deg, #d6b6f0, #f4e1ff);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .calculator {
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    padding: 25px;
+    width: 360px;
+  }
+  input, select, button {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  button:hover {
+    background-color: #732d91;
+    transform: scale(1.03);
+  }
+  #output {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #4a235a;
+  }
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    gap: 5px;
+  }
+        </style>
+
+        </head>
+        <body>
+            
+            <div class="calculator">
+                <h2 style="text-align:center;">Dynamic Calculator</h2>
+                <div id="inputContainer">
+                    <input type="number" class ="numInput" placeholder ="Enter a number">
+                </div>
+                
+                
+                <select id="operator">
+                    <option value="+">Addition(+)</option>
+                    <option value="-">Subtraction(-)</option>
+                    <option value="*">Multiplication(*)</option>
+                    <option value="/">Division(/)</option>
+                    <option value="%">Modulus(%)</option>
+
+                </select>
+                <div class="btn-group">
+                    <button onclick="calculate()">Calculate</button>
+                    <buton onclick="removeLast()">Remove Last</buton>
+                    <button onclick="resetAll()">Reset</button>
+
+                </div>
+                
+            </div>
+            <p id="output"> Result will appear here</p>
+
+            <script>
+                const inputContainer = document.getElementById("inputContainer");
+                //Add new input when enter key is pressed
+                inputContainer.addEventListener("keypress", function(event) {
+                    if(event.key =="Enter"){
+                        event.preventDefault();
+                        const newInput =document.createElement("input");
+                        newInput.type="number";
+                        newInput.className ="numInput";
+                        newInput.placeholder ="Enter another number";
+                        inputContainer.appendChild(newInput);
+                        newInput.focus();
+                    }
+                });
+
+               function calculate(){
+                const numbers =Array.from(document.querySelectorAll("numInput"))
+                .map(input => Number(input.value))
+                .filter(num => !isNaN(num));
+
+                if (numbers.length >2){
+                   document.getElementById("output").innerText="Enter atleast two numbers";
+                   return;
+                }
+                const operator = document.getElementById("operator").value;
+                let result =numbers[0];
+
+                for(let i=1 ; i< numbers.length ; i++){
+                    switch(operator) {
+                    case '+': result += numbers[i]; break;
+                    case '-': result -= numbers[i]; break;
+                    case '*': result *= numbers[i]; break;
+                    case '/': 
+                    result = numbers[i]!== 0 ? result / numbers[i] : "Cannot divide by Zero";
+                     break;
+
+                    }
+                }
+                document.getElementById("output").innerText =`Result ${result}`;
+               }
+
+               //Remove the last input field 
+               function removeLast(){
+                const inputs = document.querSelector(".numInput");
+                if (inputs.length1 > 1 ){
+                    inputContainer.removeChild(inputs[inputs.length - 1]);
+                }
+
+               }
+
+               //Reset all input and result 
+               function resetAll(){
+                inputContainer.innerText ='<input type ="number" class="numInput" placeholder="Enter a number">';
+                document.getElementById("output").innerText ="Result will appear here";
+               }
+
+            
+            </script>
+
+        
+        </body>
+    
+    </html>
